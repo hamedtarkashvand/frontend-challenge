@@ -1,34 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import UserMenu from './components/UserMenu'
+import ThemeProvider from './providers/themeProvider'
+import getUser from './actions/getUser'
+import { User } from './types'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState<Partial<User>>({})
+  
+  useEffect(() => {
+    getUser().then((value) => {
+      setUser(value)
+    }).catch((error) => {
+        throw new Error(error)
+    })
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeProvider>
+      <div
+        className="
+        p-10
+        flex
+        h-screen
+        items-start
+        justify-center
+        border-[1px]
+        bg-gray-50"
+      >
+        <UserMenu currentUser={user} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </ThemeProvider>
   )
 }
 
