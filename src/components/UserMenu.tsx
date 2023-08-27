@@ -1,6 +1,6 @@
 import { FC, useCallback, useContext, useMemo, useState } from "react";
 import { IconType } from "react-icons";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/Io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AiOutlineQuestion } from "react-icons/ai";
 import { BsBoxArrowLeft } from "react-icons/bs";
 import { LuSettings2 } from "react-icons/lu";
