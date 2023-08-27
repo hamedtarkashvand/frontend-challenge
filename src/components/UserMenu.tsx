@@ -1,4 +1,4 @@
-import { FC, useCallback, useContext, useMemo, useRef, useState } from "react";
+import React, { FC, useCallback, useContext, useMemo, useRef, useState } from "react";
 import Avatar from "./Avatar";
 import Badge from "./Badge";
 import MenuItem from "./MenuItem";
@@ -6,7 +6,8 @@ import MenuItem from "./MenuItem";
 import useClickOutside from "../hooks/useClickOutside";
 
 import { IconType } from "react-icons";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
+import { RiArrowUpSLine, RiArrowDownSLine } from "react-icons/ri";
 import { AiOutlineQuestion } from "react-icons/ai";
 import { BsBoxArrowLeft } from "react-icons/bs";
 import { LuSettings2 } from "react-icons/lu";
@@ -24,17 +25,25 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isDark, switchTheme } = useContext(ThemeContext);
   const elRef = useRef<HTMLDivElement>(null);
-  const toggleIsOpen = useCallback(() => {
-    setIsOpen((value) => !value);
-  }, []);
-  useClickOutside(elRef, toggleIsOpen);
+    useClickOutside(elRef, () => setIsOpen(false));
+
+  
+  const toggleIsOpen = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      e.stopPropagation();
+
+      setIsOpen((value) => !value);
+    },
+    [],
+  );
+
 
   const IconArrow: IconType = useCallback(
     (props) => {
       if (isOpen) {
-        return <IoIosArrowDown {...props} />;
+        return <RiArrowDownSLine {...props} />;
       }
-      return <IoIosArrowUp {...props} />;
+      return <RiArrowUpSLine {...props} />;
     },
     [isOpen],
   );
@@ -46,8 +55,9 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
   }, [currentUser]);
 
   return (
-    <div ref={elRef} className="relative">
+    <div className="relative">
       <div
+        ref={elRef}
         className="
         dark:bg-zinc-950
         file: cursor-pointer 
@@ -60,7 +70,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
          px-4"
       >
         <div
-          onClick={toggleIsOpen}
+          onClick={(e) => toggleIsOpen(e)}
           className="
             flex
             flex-row
