@@ -44,7 +44,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative">
       <div
         className="
-        dark:bg-slate-800
+        dark:bg-zinc-950
         file: cursor-pointer 
          border-[1px]
         border-[#C5C5C5]
@@ -69,7 +69,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
               items-center
               gap-3"
           >
-            <div className="rounded-full border-[1px]">
+            <div className="rounded-full border-[1px] dark:border-zinc-800">
               <Avatar src={user?.profile?.avatar} />
             </div>
 
@@ -88,7 +88,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
                     w-full 
                     shadow-xl
                     bg-white
-                    dark:bg-slate-800
+                    dark:bg-zinc-950
                     overflow-hidden
                     text-sm
                     top-20
@@ -107,7 +107,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
                   </span>
                   <Badge color="primary" badgeContent="PRO" />
                 </div>
-                <p className="text-sm text-gray-400 dark:bg-slate-800 font-md">
+                <p className="text-sm text-gray-400 dark:bg-Zinc-950 font-md">
                   {user?.email}
                 </p>
               </div>
