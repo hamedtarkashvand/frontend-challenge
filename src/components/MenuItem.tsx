@@ -1,16 +1,12 @@
-import type { FC } from 'react'
-import { IconType } from 'react-icons'
+import type { FC } from "react";
+import { IconType } from "react-icons";
 interface MenuItemProps {
-  onClick: () => void
-  label: string 
-  icon?:IconType
+  onClick: () => void;
+  label: string;
+  icon?: IconType;
 }
 
-const MenuItem: FC<MenuItemProps> = ({
-  onClick,
-  label,
- icon : Icon
-}) => {
+const MenuItem: FC<MenuItemProps> = ({ onClick, label, icon: Icon }) => {
   return (
     <div
       onClick={onClick}
@@ -34,6 +30,6 @@ const MenuItem: FC<MenuItemProps> = ({
       {Icon && <Icon size={20} />}
       {label}
     </div>
-  )
-}
-export default MenuItem
+  );
+};
+export default MenuItem;

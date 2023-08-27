@@ -1,44 +1,44 @@
-import { FC, useCallback, useContext, useMemo, useState } from 'react'
-import { IconType } from 'react-icons'
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/Io'
-import { AiOutlineQuestion } from 'react-icons/ai'
-import { BsBoxArrowLeft } from 'react-icons/bs'
-import { LuSettings2 } from 'react-icons/lu'
-import { PiArrowLineUpBold } from 'react-icons/pi'
-import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md'
+import { FC, useCallback, useContext, useMemo, useState } from "react";
+import { IconType } from "react-icons";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/Io";
+import { AiOutlineQuestion } from "react-icons/ai";
+import { BsBoxArrowLeft } from "react-icons/bs";
+import { LuSettings2 } from "react-icons/lu";
+import { PiArrowLineUpBold } from "react-icons/pi";
+import { MdOutlineLightMode, MdOutlineNightlight } from "react-icons/md";
 
-import { ThemeContext } from '../providers/themeProvider'
-import Avatar from './Avatar'
-import Badge from './Badge'
-import MenuItem from './MenuItem'
-import { User } from '../types'
+import { ThemeContext } from "../providers/themeProvider";
+import Avatar from "./Avatar";
+import Badge from "./Badge";
+import MenuItem from "./MenuItem";
+import { User } from "../types";
 
 interface UserMenuProps {
-  currentUser?: Partial<User>
+  currentUser?: Partial<User>;
 }
 
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const { isDark, switchTheme } = useContext(ThemeContext)
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isDark, switchTheme } = useContext(ThemeContext);
   const toggleIsOpen = useCallback(() => {
-    setIsOpen((value) => !value)
-  }, [])
+    setIsOpen((value) => !value);
+  }, []);
 
   const IconArrow: IconType = useCallback(
     (props) => {
       if (isOpen) {
-        return <IoIosArrowDown {...props} />
+        return <IoIosArrowDown {...props} />;
       }
-      return <IoIosArrowUp {...props} />
+      return <IoIosArrowUp {...props} />;
     },
     [isOpen],
-  )
+  );
 
   const user = useMemo(() => {
     return {
       ...currentUser,
-    }
-  }, [currentUser])
+    };
+  }, [currentUser]);
 
   return (
     <div className="relative">
@@ -156,6 +156,6 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
         )}
       </div>
     </div>
-  )
-}
-export default UserMenu
+  );
+};
+export default UserMenu;

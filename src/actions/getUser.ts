@@ -1,8 +1,7 @@
-import { User } from "../types"
+import { User } from "../types";
 
 export default async function getUser() {
-    
-    const query = `{
+  const query = `{
                     me {
                         email
                         profile {
@@ -11,24 +10,23 @@ export default async function getUser() {
                         id
                         name
                         }
-                     }`
-    
-    const user = await fetchGraphQL(query)
-    
-    if (!user) {
-        return {}
-  }
-  
-    const { me }:{me:User} = user.data
-    return  me
+                     }`;
 
+  const user = await fetchGraphQL(query);
+
+  if (!user) {
+    return {};
+  }
+
+  const { me }: { me: User } = user.data;
+  return me;
 }
 
-async function fetchGraphQL(operationsDoc:string) {
-  const result = await fetch('/graphql', {
-    method: 'POST',
+async function fetchGraphQL(operationsDoc: string) {
+  const result = await fetch("/graphql", {
+    method: "POST",
     headers: {
-      'content-type': 'application/json',
+      "content-type": "application/json",
     },
     body: JSON.stringify({
       query: operationsDoc,
