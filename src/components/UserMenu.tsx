@@ -1,4 +1,10 @@
-import { FC, useCallback, useContext, useMemo, useState } from "react";
+import { FC, useCallback, useContext, useMemo, useRef, useState } from "react";
+import Avatar from "./Avatar";
+import Badge from "./Badge";
+import MenuItem from "./MenuItem";
+
+import useClickOutside from "../hooks/useClickOutside";
+
 import { IconType } from "react-icons";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AiOutlineQuestion } from "react-icons/ai";
@@ -8,9 +14,6 @@ import { PiArrowLineUpBold } from "react-icons/pi";
 import { MdOutlineLightMode, MdOutlineNightlight } from "react-icons/md";
 
 import { ThemeContext } from "../providers/themeProvider";
-import Avatar from "./Avatar";
-import Badge from "./Badge";
-import MenuItem from "./MenuItem";
 import { User } from "../types";
 
 interface UserMenuProps {
@@ -20,9 +23,11 @@ interface UserMenuProps {
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isDark, switchTheme } = useContext(ThemeContext);
+  const elRef = useRef<HTMLDivElement>(null);
   const toggleIsOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
+  useClickOutside(elRef, toggleIsOpen);
 
   const IconArrow: IconType = useCallback(
     (props) => {
@@ -41,7 +46,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
   }, [currentUser]);
 
   return (
-    <div className="relative">
+    <div ref={elRef} className="relative">
       <div
         className="
         dark:bg-zinc-950
