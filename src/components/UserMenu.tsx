@@ -14,7 +14,7 @@ import MenuItem from './MenuItem'
 import { User } from '../types'
 
 interface UserMenuProps {
-  currentUser?: User | null
+  currentUser?: Partial<User>
 }
 
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
@@ -119,7 +119,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
                        flex-col
                        gap-2
                        mt-1 
-                       mb-3
+                       
                       "
             >
               <MenuItem
